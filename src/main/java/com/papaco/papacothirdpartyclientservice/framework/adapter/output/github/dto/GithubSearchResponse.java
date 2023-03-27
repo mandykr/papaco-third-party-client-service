@@ -1,4 +1,4 @@
-package com.papaco.papacothirdpartyclientservice.framework.adapter.output.github;
+package com.papaco.papacothirdpartyclientservice.framework.adapter.output.github.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

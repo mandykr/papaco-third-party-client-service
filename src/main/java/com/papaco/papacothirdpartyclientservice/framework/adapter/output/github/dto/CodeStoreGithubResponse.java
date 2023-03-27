@@ -1,4 +1,4 @@
-package com.papaco.papacothirdpartyclientservice.framework.adapter.output.github;
+package com.papaco.papacothirdpartyclientservice.framework.adapter.output.github.dto;
 
 import com.papaco.papacothirdpartyclientservice.application.dto.CodeStoreFindResponse;
 import lombok.AllArgsConstructor;

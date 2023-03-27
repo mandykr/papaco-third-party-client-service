@@ -19,4 +19,9 @@ public class CodeStoreService implements CodeStoreUseCase {
     public Page<CodeStoreFindResponse> findCodeStores(Pageable page, String memberName) {
         return codeStoreClient.fetchCodeStoresByMemberName(page, memberName);
     }
+
+    @Override
+    public long fetchCountPullRequests(String memberName, String codeStoreName) {
+        return codeStoreClient.fetchCountPullRequests(memberName, codeStoreName);
+    }
 }

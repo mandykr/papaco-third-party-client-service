@@ -9,20 +9,26 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@RequestMapping("/code-stores")
 @RestController
 public class CodeStoreRestController {
     private final CodeStoreUseCase codeStoreUseCase;
 
-    @GetMapping("/{memberName}")
+    @GetMapping("/code-stores/{memberName}")
     public ResponseEntity<Page<CodeStoreFindResponse>> findCodeStoresByMemberName(
             @PageableDefault(size = 10, page = 0, sort = "updated") Pageable page,
             @PathVariable String memberName) {
         Page<CodeStoreFindResponse> codeStores = codeStoreUseCase.findCodeStores(page, memberName);
         return ResponseEntity.ok().body(codeStores);
+    }
+
+    @GetMapping("/code-stores/{memberName}/{codeStoreName}/pulls/count")
+    public ResponseEntity<Long> fetchCountPullRequests(
+            @PathVariable String memberName,
+            @PathVariable String codeStoreName) {
+        long count = codeStoreUseCase.fetchCountPullRequests(memberName, codeStoreName);
+        return ResponseEntity.ok().body(count);
     }
 }

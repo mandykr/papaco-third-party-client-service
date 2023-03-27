@@ -6,4 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface CodeStoreUseCase {
     Page<CodeStoreFindResponse> findCodeStores(Pageable page, String memberName);
+
+    long fetchCountPullRequests(String memberName, String codeStoreName);
 }

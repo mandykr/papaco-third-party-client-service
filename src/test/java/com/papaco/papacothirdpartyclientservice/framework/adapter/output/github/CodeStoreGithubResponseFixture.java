@@ -1,5 +1,7 @@
 package com.papaco.papacothirdpartyclientservice.framework.adapter.output.github;
 
+import com.papaco.papacothirdpartyclientservice.framework.adapter.output.github.dto.CodeStoreGithubResponse;
+
 import java.util.Arrays;
 import java.util.List;
 

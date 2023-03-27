@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum GithubURIs {
     REPOSITORIES_FOR_A_USER("/users/{username}/repos"),
-    SEARCH_REPOSITORIES("/search/repositories")
+    SEARCH_REPOSITORIES("/search/repositories"),
+    LIST_PULL_REQUESTS("/repos/{owner}/{repo}/pulls")
     ;
 
     private final String uri;

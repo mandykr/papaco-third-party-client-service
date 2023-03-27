@@ -1,6 +1,7 @@
 package com.papaco.papacothirdpartyclientservice.framework.adapter.output.github;
 
 import com.papaco.papacothirdpartyclientservice.application.dto.CodeStoreFindResponse;
+import com.papaco.papacothirdpartyclientservice.framework.adapter.output.github.dto.GithubSearchResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

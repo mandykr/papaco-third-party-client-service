@@ -12,7 +12,7 @@ import java.net.URI;
 @Getter
 public class GithubRequest {
     private final String baseUri;
-    private final String path;
+    private String path;
     private final UriComponentsBuilder builder;
     private URI uri;
 
@@ -38,6 +38,10 @@ public class GithubRequest {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add(key, qualifier + ":" + value);
         builder.queryParams(params);
+    }
+
+    public void addPathParam(String key, String value) {
+        this.path = this.path.replaceAll("{" + key + "}", value);
     }
 
     public void addPageParams(Pageable page) {

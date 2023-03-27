@@ -2,13 +2,18 @@ package com.papaco.papacothirdpartyclientservice.framework.adapter.output.github
 
 import com.papaco.papacothirdpartyclientservice.application.dto.CodeStoreFindResponse;
 import com.papaco.papacothirdpartyclientservice.application.port.output.CodeStoreClient;
+import com.papaco.papacothirdpartyclientservice.framework.adapter.output.github.dto.CodeStoreGithubResponse;
+import com.papaco.papacothirdpartyclientservice.framework.adapter.output.github.dto.GithubSearchResponse;
+import com.papaco.papacothirdpartyclientservice.framework.adapter.output.github.dto.PullRequestResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -52,5 +57,21 @@ public class GithubClient implements CodeStoreClient {
                 .collect(Collectors.toList());
 
         return new PageImpl<>(findResponses, pageRequest, githubSearchResponse.getTotalCount());
+    }
+
+    @Override
+    public long fetchCountPullRequests(String memberName, String codeStoreName) {
+        GithubRequest githubRequest = new GithubRequest(baseUri, GithubURIs.LIST_PULL_REQUESTS);
+        githubRequest.addPathParam("owner", memberName);
+        githubRequest.addPathParam("repo", codeStoreName);
+        URI uri = githubRequest.build().getUri();
+        ResponseEntity<List<PullRequestResponse>> response =
+                githubRestTemplate.exchange(
+                        uri,
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<List<PullRequestResponse>>() {}
+                );
+        return Objects.requireNonNull(response.getBody()).size();
     }
 }
